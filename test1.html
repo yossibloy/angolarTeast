@@ -1,0 +1,69 @@
+
+<div class="a"></div>
+<br><br><br>
+<div class="b"></div>
+
+
+<script>
+let data =[
+{id:"1", year:"12",name:"yossi",class:"a",ifgud:true},
+{id:"2", year:"15",name:"moshe",class:"b",ifgud:false},
+{id:"3", year:"11",name:"shlomo",class:"c",ifgud:false},
+{id:"4", year:"12",name:"yakov",class:"d",ifgud:true},
+{id:"5", year:"12",name:"moty",class:"a",ifgud:true},
+{id:"6", year:"15",name:"david",class:"b",ifgud:false},
+{id:"7", year:"11",name:"dov",class:"c",ifgud:false},
+{id:"8", year:"12",name:"israel",class:"d",ifgud:true},
+{id:"9", year:"12",name:"yonatn",class:"a",ifgud:true},
+{id:"10", year:"15",name:"menashe",class:"b",ifgud:false},
+{id:"11", year:"11",name:"avraham",class:"c",ifgud:false},
+{id:"12", year:"12",name:"ahron",class:"d",ifgud:true}
+]
+
+
+ let templet1 =`<li 
+    <label>id: </label><span>[id]</span>
+    <label>year: </label><span>[year]</span>
+    <label>name: </label><span>[name]</span>
+    <label>class: </label><span>[class]</span>
+    <label>ifgud: </label><span>[ifgud]</span>
+
+</li>`
+
+
+let templet2 =`<li 
+    <label>id: </label><span>[id]</span><br>
+    <label>name: </label><span>[name]</span><br>
+    <label>class: </label><span>[class]</span><br>
+    <label>ifgud: </label><span>[ifgud]</span><br>
+</li>`
+
+document.querySelector('.a').innerHTML =render(templet1,data)
+document.querySelector('.b').innerHTML =render(templet2,data)
+
+
+
+function render(template, dataArr) {
+    let h = ''
+    let propertiesInTemplate2 = []
+    let temparr = template.split('[')
+    for (let i = 1; i < temparr.length; i++) {
+        let part = temparr[i];
+        let arr2 = part.split(']')
+        propertiesInTemplate2.push(arr2[0])
+    }
+
+   dataArr.forEach(item => {
+        let itemHtml = template
+        propertiesInTemplate2.forEach(p => {
+            let propValue = item[p]
+            itemHtml = itemHtml.replace(`[${p}]`, propValue)
+        })
+        h += itemHtml
+        
+        
+    });
+    return h
+}
+
+</script>

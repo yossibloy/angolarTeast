@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .div {
+            display: flex;
+            flex-direction: row;
+            flex-wrap: wrap;
+        }
+        .a{
+            background: chartreuse;
+            font-weight: bold
+        }
+        .b{
+            background:coral;
+            font-weight: bold
+        }
+        .c{
+            background:cornflowerblue;
+            
+
+        }
+    </style>
+
+</head>
+
+<body>
+<div class="div">
+    <com-stu class="a" img src="http://img1.jpg" stuid="1" gud="true" year="12"></com-stu>
+    <com-stu class="b" img src="http://img2.jpg" stuid="2" gud="true" year="11"></com-stu>
+    <com-stu class="a" img src="http://img3.jpg" stuid="3" gud="true" year="12"></com-stu>
+    <com-stu class="c" img src="http://img4.jpg" stuid="4" gud="false" year="13"></com-stu>
+    <com-stu class="a" img src="http://img5.jpg" stuid="5" gud="true" year="12"></com-stu>
+    <com-stu class="b" img src="http://img6.jpg" stuid="6" gud="true" year="11"></com-stu>
+    <com-stu class="c" img src="http://img7.jpg" stuid="7" gud="false" year="13"></com-stu>
+    <com-stu class="b" img src="http://img8.jpg" stuid="8" gud="true" year="11"></com-stu>
+    <com-stu class="a" img src="http://img9.jpg" stuid="9" gud="true" year="12"></com-stu>
+    <com-stu class="b" img src="http://img10.jpg" stuid="10" gud="true" year="11"></com-stu>
+    <com-stu class="a" img src="http://img11.jpg" stuid="11" gud="true" year="12"></com-stu>
+    <com-stu class="c" img src="http://img12.jpg" stuid="12" gud="false" year="13"></com-stu>
+</div>
+
+
+<script>
+    class Comstu extends HTMLElement {
+        constructor() {
+        super();
+        let sadow = this.attachShadow({ mode: 'open' });
+        let div = document.createElement('div')
+        div.className = "d"
+        let style = document.createElement('style')
+        sadow.appendChild(div)
+        sadow.appendChild(style)
+        style.innerHTML = `.d{
+        width: 200px;
+        height:60px;
+        border: 3px solid rgb(18, 39, 219);
+        margin: auto;
+        padding: 10px;
+        }`
+
+        this.img = document.createElement('img')
+        div.appendChild(this.img)
+        this.img.innerHTML = this.getAttribute("img src")
+    
+        this.li = document.createElement('li')
+        div.appendChild(this.li)
+        this.li.innerHTML = `student id: ` + this.getAttribute("stuid")
+                                            + ` , ifgud: `+ this.getAttribute("gud")
+                                            + ` , year: ` + this.getAttribute("year")
+        // if(y==true){
+        //     style.innerHTML +=`.d{
+        //         font-weight: bold
+        //     }`
+        // }
+                                                
+
+        }
+    }
+    customElements.define('com-stu', Comstu)
+
+
+
+</script>
+
+
+</body>
+
+</html>

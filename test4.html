@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <style>
+        .div {
+            display: flex;
+            flex-direction: row;
+            margin: auto;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="div">
+        <com-sel1></com-sel1>
+        <com-sel2></com-sel2>
+    </div>
+
+<script>
+
+// data
+let data1 = [
+    { id: "1", year: "12", name: "yossi", class: "a", ifgud: true },
+    { id: "2", year: "15", name: "moshe", class: "b", ifgud: false },
+    { id: "3", year: "11", name: "shlomo", class: "c", ifgud: false },
+    { id: "4", year: "12", name: "yakov", class: "d", ifgud: true },
+    { id: "5", year: "12", name: "moty", class: "a", ifgud: true },
+    { id: "6", year: "15", name: "david", class: "b", ifgud: false },
+    { id: "7", year: "11", name: "dov", class: "c", ifgud: false },
+    { id: "8", year: "12", name: "israel", class: "d", ifgud: true },
+    { id: "9", year: "12", name: "yonatn", class: "a", ifgud: true },
+    { id: "10", year: "15", name: "menashe", class: "b", ifgud: false },
+    { id: "11", year: "11", name: "avraham", class: "c", ifgud: false },
+    { id: "12", year: "12", name: "ahron", class: "d", ifgud: true }
+]
+let data2 = [
+    { id: "1", year: "14", name: "ahron", class: "g", ifgud: true },
+    { id: "2", year: "13", name: "avraham", class: "b", ifgud: false },
+    { id: "3", year: "14", name: "menashe", class: "c", ifgud: false },
+    { id: "4", year: "14", name: "yonatn", class: "f", ifgud: true },
+    { id: "5", year: "12", name: "dov", class: "h", ifgud: true },
+    { id: "6", year: "15", name: "david", class: "b", ifgud: false },
+    { id: "7", year: "11", name: "moty", class: "c", ifgud: false },
+    { id: "8", year: "12", name: "yakov", class: "d", ifgud: true },
+    { id: "9", year: "11", name: "shlomo", class: "a", ifgud: true },
+    { id: "10", year: "15", name: "moshe", class: "b", ifgud: false },
+    { id: "11", year: "13", name: "menashe", class: "c", ifgud: false },
+    { id: "12", year: "12", name: "yossi", class: "d", ifgud: true }
+]
+let data3 = [
+    { id: "1", year: "12", name: "yossi", class: "a", ifgud: true },
+    { id: "2", year: "15", name: "moshe", class: "b", ifgud: false },
+    { id: "3", year: "11", name: "shlomo", class: "c", ifgud: false },
+    { id: "4", year: "12", name: "yakov", class: "d", ifgud: true },
+    { id: "5", year: "12", name: "moty", class: "a", ifgud: true },
+    { id: "6", year: "15", name: "david", class: "b", ifgud: false },
+    { id: "7", year: "11", name: "dov", class: "c", ifgud: false },
+    { id: "8", year: "12", name: "israel", class: "d", ifgud: true },
+    { id: "9", year: "12", name: "yonatn", class: "a", ifgud: true },
+    { id: "10", year: "15", name: "menashe", class: "b", ifgud: false },
+    { id: "11", year: "11", name: "avraham", class: "c", ifgud: false },
+    { id: "12", year: "12", name: "ahron", class: "d", ifgud: true }
+]
+let data4 = [
+    { id: "1", year: "14", name: "ahron", class: "g", ifgud: true },
+    { id: "2", year: "13", name: "avraham", class: "b", ifgud: false },
+    { id: "3", year: "14", name: "menashe", class: "c", ifgud: false },
+    { id: "4", year: "14", name: "yonatn", class: "f", ifgud: true },
+    { id: "5", year: "12", name: "dov", class: "h", ifgud: true },
+    { id: "6", year: "15", name: "david", class: "b", ifgud: false },
+    { id: "7", year: "11", name: "moty", class: "c", ifgud: false },
+    { id: "8", year: "12", name: "yakov", class: "d", ifgud: true },
+    { id: "9", year: "11", name: "shlomo", class: "a", ifgud: true },
+    { id: "10", year: "15", name: "moshe", class: "b", ifgud: false },
+    { id: "11", year: "13", name: "menashe", class: "c", ifgud: false },
+    { id: "12", year: "12", name: "yossi", class: "d", ifgud: true }
+]
+let o = { 1: data1, 2: data2, 3: data3, 4: data4 }
+
+// templet
+    let templet = `<com-stu id=[id] year=[year] name=[name] class=[class] ifgud=[ifgud]></com-stu>`
+
+class Comsel1 extends HTMLElement {
+    constructor() {
+        super();
+        let sadow = this.attachShadow({ mode: 'open' });
+        let s = document.createElement('select')
+        let temp = ` <option>[grup]</option>`
+        let dat = [
+            { grup: "a" },
+            { grup: "b" },
+        ]
+        s.innerHTML = render(temp, dat)
+        sadow.appendChild(s)
+        let d = document.createElement('div')
+        sadow.appendChild(d)
+        s.onchange = ev => {
+            if (s.value == "a") {
+                d.innerHTML = render(templet,o[1])
+            }
+            else {
+                d.innerHTML = render(templet, o[2])
+            }
+        }
+    }
+}
+customElements.define("com-sel1", Comsel1)
+
+
+
+
+class Comsel2 extends HTMLElement {
+    constructor() {
+        super();
+        let sadow = this.attachShadow({ mode: 'open' });
+        let s = document.createElement('select')
+        let temp = ` <option>[grup]</option>`
+        let dat = [
+            { grup: "c" },
+            { grup: "d" },
+        ]
+        s.innerHTML = render(temp, dat)
+        sadow.appendChild(s)
+        let d = document.createElement('div')
+        sadow.appendChild(d)
+        s.onchange = ev => {
+            if (s.value == "c") {
+                d.innerHTML = render(templet,o[3])
+            }
+            else {
+                d.innerHTML = render(templet, o[4])
+            }
+        }
+    }
+}
+customElements.define("com-sel2", Comsel2)
+
+
+// class Comstu
+class Comstu extends HTMLElement {
+    constructor() {
+        super();
+        let sadow = this.attachShadow({ mode: 'open' });
+        let div = document.createElement('div')
+        div.className = "d"
+        let style = document.createElement('style')
+        sadow.appendChild(div)
+        sadow.appendChild(style)
+        style.innerHTML = `.d{
+width: 200px;
+height:60px;
+border: 3px solid rgb(18, 39, 219);
+margin: auto;
+padding: 20px;
+}`
+
+        this.li = document.createElement('li')
+        div.appendChild(this.li)
+        this.li.innerHTML = `id: ` + this.getAttribute("id")
+            + ` , year: ` + this.getAttribute("year")
+            + ` , name: ` + this.getAttribute("name")
+            + ` , class: ` + this.getAttribute("class")
+            + ` , ifgud: ` + this.getAttribute("ifgud")
+    }
+}
+customElements.define('com-stu', Comstu)
+
+// render
+function render(template, dataArr) {
+    let h = ''
+    let propertiesInTemplate2 = []
+    let temparr = template.split('[')
+    for (let i = 1; i < temparr.length; i++) {
+        let part = temparr[i];
+        let arr2 = part.split(']')
+        propertiesInTemplate2.push(arr2[0])
+    }
+
+    dataArr.forEach(item => {
+        let itemHtml = template
+        propertiesInTemplate2.forEach(p => {
+            let propValue = item[p]
+            itemHtml = itemHtml.replace(`[${p}]`, propValue)
+        })
+        h += itemHtml
+
+
+    });
+    return h
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>
